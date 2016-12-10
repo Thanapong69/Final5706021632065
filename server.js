@@ -29,7 +29,7 @@ app.post('/webhook/', function (req, res) {
         continue
       }
       var text2 = text.split(' ')
-      sendTextMessage(sender,paresInt(text2[0]) + paresInt(text2[1]) )
+      sendTextMessage(sender,paresInt(text2[0])+paresInt(text2[1]) )
     }
     if (event.postback) {
       let text = JSON.stringify(event.postback)
