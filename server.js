@@ -25,13 +25,13 @@ app.post('/webhook/', function (req, res) {
     if (event.message && event.message.text) {
       let text = event.message.text
       var location = event.message.text
-      var weatherEndpoint = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22' + location + '%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
+      var weatherEndpoint = 'http://api.openweathermap.org/data/2.5/weather?q=' +location+ '&units=metric&appid=ea5272e74853f242bc0efa9fef3dd9f3'
       request({
         url: weatherEndpoint,
         json: true
       }, function(error, response, body) {
         try {
-          var condition = body.query.results.channel.item.condition;
+          var condition = body.main.temp;
           sendTextMessage(sender, "Today is " + condition.temp + " and " + condition.text + " in " + location);
         } catch(err) {
           console.error('error caught', err);
