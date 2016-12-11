@@ -31,8 +31,8 @@ app.post('/webhook/', function (req, res) {
         json: true
       }, function(error, response, body) {
         try {
-          var condition = body.main.temp;
-          sendTextMessage(sender, "Today is " + condition.temp + " and " + condition.text + " in " + location);
+          var condition = body.main;
+          sendTextMessage(sender, "Today is " + condition.temp + "Celsius in " + location);
         } catch(err) {
           console.error('error caught', err);
           sendTextMessage(sender, "There was an error.");
